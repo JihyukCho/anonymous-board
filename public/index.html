@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>익명 질문 보내기</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    input {
+      padding: 10px;
+      width: 300px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      background: #4CAF50;
+      color: white;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    #result {
+      margin-top: 15px;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <h1>나에게 익명 질문 보내기</h1>
+  <input type="text" id="message" placeholder="질문을 입력하세요">
+  <button onclick="sendMessage()">보내기</button>
+  <p id="result"></p>
+
+  <script>
+    async function sendMessage() {
+      const message = document.getElementById('message').value.trim();
+      if (!message) {
+        alert("질문을 입력해주세요!");
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({ message })
+        });
+
+        if (res.ok) {
+          document.getElementById('result').textContent = "성공적으로 보냈습니다!";
+          document.getElementById('
