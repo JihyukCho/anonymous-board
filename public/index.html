@@ -62,5 +62,15 @@
         });
 
         if (res.ok) {
-          document.getElementById('result').textContent = "성공적으로 보냈습니다!";
-          document.getElementById('
+          document.getElementById('result').textContent = "지혁이한테 전송 완료!";
+          document.getElementById('message').value = "";
+        } else {
+          document.getElementById('result').textContent = "보내기에 실패했습니다.";
+        }
+      } catch (err) {
+        document.getElementById('result').textContent = "에러가 발생했습니다.";
+      }
+    }
+  </script>
+</body>
+</html>
